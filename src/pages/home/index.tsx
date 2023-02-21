@@ -1,7 +1,10 @@
-import { PodcastList } from "../../components/podcast-list"
+import { MainLayout, PodcastList } from "../../components"
 
 const Home = () => {
-  return  <PodcastList />
+  return(
+     <MainLayout>
+      <PodcastList />
+    </MainLayout>) 
 }
 
 export default Home
