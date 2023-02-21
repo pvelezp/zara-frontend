@@ -7,30 +7,31 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { EpisodeDetail, Home, PodcastDetail } from './pages'
+import { MainLayout } from './components';
 import './index.css'
+
+const withLayout = (component:React.ReactNode) => <MainLayout>{component}</MainLayout> 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: withLayout(<Home />),
   },
   {
     path: "podcast/:podcastId",
-    element: <PodcastDetail />,
+    element: withLayout(<PodcastDetail />),
   },
   {
     path: "podcast/:podcastId/episode/:episodeId",
-    element: <EpisodeDetail />,
+    element: withLayout(<EpisodeDetail />),
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ApiProvider api={podcastApi}>
-    <React.StrictMode>
     <Suspense fallback={<div>Loading... </div>}>
     <RouterProvider router={router} />
     </Suspense>
-  </React.StrictMode>
   </ApiProvider>
 ,
 )

@@ -1,38 +1,25 @@
-import { podcastApi } from "../../services/podcast";
 import styled from "styled-components"
-import { useNavigate } from "react-router-dom";
+import { PodcastCard } from "../podcast-card";
 
 const List = styled.section`
     display:flex;
     flex-wrap:wrap;
-    gap: 10;
+    gap: 4rem;
+    justify-content: center;
 `
 
-export const PodcastList = () => {
-  const { data, isLoading, error } = podcastApi.useGetPodcastsQuery();
-  const navigate = useNavigate()
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-    
-  const podcastList = JSON.parse(data.contents).feed.entry
+export const PodcastList = ({podcastList}) => {
 
   return (
     <List>
-        {podcastList.map((podcast) =>  (
-        <div
-        onClick={()=> navigate(`/podcast/${podcast.id.attributes["im:id"]}`)}
-        key={podcast.id.attributes["im:id"]}>
-          <img src={podcast["im:image"][0]["label"]} alt={podcast["im:name"]["label"]} />
-          <h3>{podcast["im:name"]["label"]}</h3>
-          <p>Author: {podcast["im:artist"]["label"]}</p>
-        </div>
-      ))}
+        {podcastList.map((podcast) =>  {
+          const id = podcast.id.attributes["im:id"]
+          const image = podcast["im:image"][0]["label"]
+          const name = podcast["im:name"]["label"]
+          const author = podcast["im:artist"]["label"]
+          return (
+            <PodcastCard key={id} id={id} image={image} name={name} author={author} />
+      )})}
     </List>)
 }
 

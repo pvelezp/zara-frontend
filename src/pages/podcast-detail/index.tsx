@@ -1,9 +1,9 @@
 
 const PodcastDetail = () => {
     return (
-        <div>
+        <>
             Podcast Detail
-        </div>
+        </>
     )
 }
 

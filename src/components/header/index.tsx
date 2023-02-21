@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const HeaderContainer = styled.header`
@@ -10,6 +11,7 @@ const HeaderContainer = styled.header`
     top:0;
     background-color:#fafafa;
     width:100%;
+    z-index:1;
     box-shadow: rgba(149, 157, 165, 0.23) 0px 8px 24px;
 `
 const LogoName = styled.h4`
@@ -18,7 +20,11 @@ const LogoName = styled.h4`
 export const Header = () => {
     return (
         <HeaderContainer>
-            <LogoName>Podcaster</LogoName>
+            <LogoName>
+                <Link to='/'>
+                Podcaster
+                </Link>
+            </LogoName>
           {/*   Loader    */}
         </HeaderContainer>
     )
