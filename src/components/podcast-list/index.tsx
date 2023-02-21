@@ -1,5 +1,6 @@
 import { podcastApi } from "../../services/podcast";
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom";
 
 const List = styled.section`
     display:flex;
@@ -9,6 +10,7 @@ const List = styled.section`
 
 export const PodcastList = () => {
   const { data, isLoading, error } = podcastApi.useGetPodcastsQuery();
+  const navigate = useNavigate()
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -23,7 +25,9 @@ export const PodcastList = () => {
   return (
     <List>
         {podcastList.map((podcast) =>  (
-        <div key={podcast.id.attributes["im:id"]}>
+        <div
+        onClick={()=> navigate(`/podcast/${podcast.id.attributes["im:id"]}`)}
+        key={podcast.id.attributes["im:id"]}>
           <img src={podcast["im:image"][0]["label"]} alt={podcast["im:name"]["label"]} />
           <h3>{podcast["im:name"]["label"]}</h3>
           <p>Author: {podcast["im:artist"]["label"]}</p>
