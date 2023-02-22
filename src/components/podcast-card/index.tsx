@@ -47,13 +47,16 @@ interface PodcastCardProps {
         image :string;
         name :string;
         author :string;
+        onClick:()=>void;
 }
-export const PodcastCard = ({id,name,image,author}:PodcastCardProps) => {
+export const PodcastCard = ({id,name,image,author, onClick}:PodcastCardProps) => {
   const navigate = useNavigate()
 
     return (
         <Card
-        onClick={()=> navigate(`/podcast/${id}`)}
+        onClick={()=> {
+          onClick()
+          navigate(`/podcast/${id}`)}}
         key={id}
         >
           <img src={image} alt={name} />

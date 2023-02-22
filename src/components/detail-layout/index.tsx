@@ -1,24 +1,30 @@
 import styled from "styled-components"
-import { Header } from "../header"
+import { PodcastDetailCard } from "../podcast-detail-card"
 
 interface DetailLayoutProps {
     children: React.ReactNode
 }
 
-const DetailContainer = styled.section``
-
-const Content = styled.section`
-    padding: 1.5rem;
-    margin-top:50px;
+const DetailContainer = styled.section`
+    display:flex;
+    gap:4rem;
 `
-
+const LeftDetailBox = styled.article`
+    min-width:200px;
+    padding:1rem;
+`
+const RightDetailBox = styled.article`
+    flex:1;
+`
 export const DetailLayout = ({children}:DetailLayoutProps) => {
     return (
         <DetailContainer>
-            <Header />
-            <Content>
+             <LeftDetailBox>
+                <PodcastDetailCard />
+             </LeftDetailBox>
+             <RightDetailBox>
                 {children}
-            </Content>
+             </RightDetailBox>
         </DetailContainer>
     )
 }
